@@ -243,7 +243,10 @@ when the plugin root contains spaces. Manual installers (`install.sh`,
 and rewrite that canonical token to the absolute path in every Markdown file
 they install, because a manual install has no plugin root.
 
-Plugin environments live under persistent `CLAUDE_PLUGIN_DATA`. Manual installs
+Plugin environments live under persistent `CLAUDE_PLUGIN_DATA`, trusted only when
+its folder is named `claude-seo` or `claude-seo-<marketplace>` or when
+`CLAUDE_PLUGIN_ROOT` is this checkout (another plugin's leaked value falls back to
+the per-user `claude-seo` folder; `CLAUDE_SEO_DATA_DIR` overrides both). Manual installs
 keep the compatible `~/.claude/skills/seo/.venv` location. A state marker records
 the runtime schema, requirements SHA-256, Python major and minor version, public
 plugin version, and browser state. Requirements, runtime-schema, or Python ABI

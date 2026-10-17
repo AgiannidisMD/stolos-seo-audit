@@ -56,7 +56,7 @@ def test_manual_extension_fallback_stays_inside_installed_skill(tmp_path: Path) 
 
 def test_status_uses_plugin_data_and_hash_marker(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = _fixture_root(tmp_path)
-    data = tmp_path / "persistent data"
+    data = tmp_path / "persistent data" / "claude-seo-stolosdigital"
     python = data / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     python.parent.mkdir(parents=True)
     python.write_text("", encoding="utf-8")
@@ -87,7 +87,7 @@ def test_doctor_json_omits_paths_and_environment_values(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     root = _fixture_root(tmp_path)
-    sensitive_path = tmp_path / "person-name" / "private"
+    sensitive_path = tmp_path / "person-name" / "claude-seo-private"
     monkeypatch.setattr(runtime, "_root", lambda: root)
     monkeypatch.setenv("CLAUDE_PLUGIN_DATA", str(sensitive_path))
     rc = runtime.command_doctor(SimpleNamespace(json=True))
@@ -119,7 +119,7 @@ def test_configured_data_dir_rejects_filesystem_root_and_user_home(
 
 def test_version_only_change_does_not_stale_environment(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = _fixture_root(tmp_path)
-    data = tmp_path / "data"
+    data = tmp_path / "data" / "claude-seo-stolosdigital"
     python = data / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     python.parent.mkdir(parents=True)
     python.write_text("", encoding="utf-8")
@@ -146,7 +146,7 @@ def test_error_redaction_hides_credentials_and_tokens() -> None:
 
 def test_browser_marker_requires_browser_files(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = _fixture_root(tmp_path)
-    data = tmp_path / "data"
+    data = tmp_path / "data" / "claude-seo-stolosdigital"
     python = data / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     python.parent.mkdir(parents=True)
     python.write_text("", encoding="utf-8")
@@ -164,7 +164,7 @@ def test_setup_restores_previous_environment_when_staged_swap_fails(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     root = _fixture_root(tmp_path)
-    data = tmp_path / "data"
+    data = tmp_path / "data" / "claude-seo-stolosdigital"
     final = data / ".venv"
     old_python = final / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     old_python.parent.mkdir(parents=True)
@@ -330,7 +330,7 @@ def test_browser_setup_warning_is_redacted(
     # redacted at its own print site instead of relying on the one at the
     # bottom of command_setup.
     root = _fixture_root(tmp_path)
-    data = tmp_path / "data"
+    data = tmp_path / "data" / "claude-seo-stolosdigital"
     data.mkdir(parents=True, exist_ok=True)
     (data / "runtime-state.json").write_text(
         json.dumps(runtime._expected(root)), encoding="utf-8"

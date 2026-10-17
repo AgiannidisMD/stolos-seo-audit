@@ -221,3 +221,35 @@ def test_full_audit_categories_dict_finding_keeps_explicit_severity() -> None:
     html = google_report._build_full_audit_categories(data)
 
     assert '<h4>Canonical mismatch <span class="status-warn">Critical</span></h4>' in html
+
+
+def test_pdf_cover_and_closing_note_use_stolos_branding():
+    cover = google_report._build_title_page("example.com", "SEO Audit", "")
+    assert "Prepared by Stolos SEO Audit &middot; stolosdigital.com" in cover
+    assert "Claude SEO" not in cover
+    closing = google_report._build_methodology_footer("example.com", "2026-01-01")
+    assert "Audit by Stolos SEO Audit, a free tool from Stolos Digital (stolosdigital.com)." in closing
+    assert (
+        "https://stolosdigital.com/contact?utm_source=seo-audit&amp;utm_medium=tool"
+        "&amp;utm_campaign=audit-report"
+    ) in closing
+    assert "Based on claude-seo by AgriciDaniel (MIT)." in closing
+    assert "display: none" not in closing and "display:none" not in closing
+
+
+def test_macos_library_fallback_appends_homebrew_prefixes():
+    assert google_report._macos_library_fallback({}, "linux") is None
+    assert google_report._macos_library_fallback({}, "darwin") == "/opt/homebrew/lib:/usr/local/lib"
+    value = google_report._macos_library_fallback({"DYLD_FALLBACK_LIBRARY_PATH": "/custom/lib"}, "darwin")
+    assert value == "/custom/lib:/opt/homebrew/lib:/usr/local/lib"
+    done = {"DYLD_FALLBACK_LIBRARY_PATH": "/opt/homebrew/lib:/usr/local/lib"}
+    assert google_report._macos_library_fallback(done, "darwin") is None
+
+
+def test_missing_pango_reports_brew_install_hint(tmp_path):
+    with patch.object(google_report, "HTML", None), \
+         patch.object(google_report, "_PDF_IMPORT_ERROR", OSError("cannot load library 'libpango-1.0-0'")):
+        result = google_report.generate_report(
+            "full", {"summary": {"health_score": 80}}, "example.com", tmp_path, output_format="pdf"
+        )
+    assert "brew install pango" in result["error"]

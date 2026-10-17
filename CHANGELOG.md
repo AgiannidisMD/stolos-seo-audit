@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.3] - 2026-10-17 (Stolos edition)
+
+Stolos SEO Audit, the Stolos Digital edition of claude-seo by AgriciDaniel (MIT).
+
+### Changed
+
+- The Google PDF/HTML report (`scripts/google_report.py`) now matches the
+  Markdown reports: the cover reads "Prepared by Stolos SEO Audit ·
+  stolosdigital.com", and the last page carries a visible closing note with
+  the free-call link and the credit "Based on claude-seo by AgriciDaniel
+  (MIT)". Internal identifiers and command names are unchanged.
+
+### Fixed
+
+- The runtime no longer installs its `.venv`, `ms-playwright` and
+  `runtime-state.json` into another plugin's data folder. `CLAUDE_PLUGIN_DATA`
+  is trusted only when its folder is named for this plugin (`claude-seo` or
+  `claude-seo-<marketplace>`) or when `CLAUDE_PLUGIN_ROOT` is this checkout;
+  otherwise the existing per-user fallback folder is used. `CLAUDE_SEO_DATA_DIR`
+  remains the explicit override.
+- On macOS the PDF step adds `/opt/homebrew/lib` and `/usr/local/lib` to
+  `DYLD_FALLBACK_LIBRARY_PATH` before importing WeasyPrint, because the system
+  strips `DYLD_*` variables from child processes. If pango still cannot be
+  loaded, the error now says to run `brew install pango`.
+
 ## [2.4.2] - 2026-10-04
 
 seo-cockpit, Google sign-in through your own account, and a schema-hook fix.

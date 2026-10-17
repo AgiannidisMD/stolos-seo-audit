@@ -95,8 +95,45 @@ def _requirements_hash(root: Path) -> str:
     return hashlib.sha256(content).hexdigest()
 
 
+PLUGIN_NAME = "claude-seo"
+
+
+def _plugin_root_is_ours(root: Path) -> bool:
+    """True when CLAUDE_PLUGIN_ROOT points at this checkout."""
+    raw = os.environ.get("CLAUDE_PLUGIN_ROOT")
+    if not raw:
+        return False
+    try:
+        return Path(raw).expanduser().resolve() == root.resolve()
+    except (OSError, RuntimeError):
+        return False
+
+
+def _plugin_data_is_ours(raw: str, root: Path) -> bool:
+    """Decide whether an inherited CLAUDE_PLUGIN_DATA belongs to this plugin.
+
+    Claude Code names plugin data folders ``<plugin>-<marketplace>`` (for
+    example ``claude-seo-stolosdigital``). When another plugin's session leaks
+    its own CLAUDE_PLUGIN_DATA (observed: ``.../data/codex-openai-codex``) the
+    runtime must not install its venv and browsers there, so only a folder named
+    for this plugin, or one paired with a CLAUDE_PLUGIN_ROOT that is this
+    checkout, is trusted.
+    """
+    name = Path(raw).expanduser().name
+    if name == PLUGIN_NAME or name.startswith(PLUGIN_NAME + "-"):
+        return True
+    return _plugin_root_is_ours(root)
+
+
+def _trusted_plugin_data(root: Path) -> str | None:
+    raw = os.environ.get("CLAUDE_PLUGIN_DATA")
+    if raw and _plugin_data_is_ours(raw, root):
+        return raw
+    return None
+
+
 def _is_plugin(root: Path) -> bool:
-    if os.environ.get("CLAUDE_PLUGIN_DATA") or os.environ.get("CLAUDE_PLUGIN_ROOT"):
+    if _trusted_plugin_data(root) or _plugin_root_is_ours(root):
         return True
     return (root / ".claude-plugin" / "plugin.json").is_file() and not (root / ".git").exists()
 
@@ -118,7 +155,7 @@ def _data_dir(root: Path) -> tuple[Path, str]:
     override = os.environ.get("CLAUDE_SEO_DATA_DIR")
     if override:
         return _configured_data_dir(override), "override"
-    plugin_data = os.environ.get("CLAUDE_PLUGIN_DATA")
+    plugin_data = _trusted_plugin_data(root)
     if plugin_data:
         return _configured_data_dir(plugin_data), "plugin"
     if _is_plugin(root):
