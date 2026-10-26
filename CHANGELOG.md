@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/seo citations` (`skills/seo-citations`): citation and local link plan built
   on playbook Stage 6.
 
+### Security
+
+- Pin `pillow>=13.0.0` (transitive via matplotlib and weasyprint) for the
+  October 2026 Pillow advisories flagged by pip-audit.
+
 ## [2.4.3] - 2026-10-17 (Stolos edition)
 
 Stolos SEO Audit, the Stolos Digital edition of claude-seo by AgriciDaniel (MIT).
