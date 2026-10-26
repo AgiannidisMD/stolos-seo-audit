@@ -6,7 +6,7 @@ argument-hint: "[command] [url]"
 license: MIT
 metadata:
   author: AgriciDaniel
-  version: "2.4.3"
+  version: "2.4.4"
   category: seo
 ---
 
@@ -25,7 +25,7 @@ directory because hosted marketplaces reject one. Repository users run
 with a bare Python interpreter.
 
 Comprehensive SEO analysis across all industries (SaaS, local services,
-e-commerce, publishers, agencies). Orchestrates 25 sub-skills (22 core + 1 framework
+e-commerce, publishers, agencies). Orchestrates 28 sub-skills (25 core + 1 framework
 integration + 2 extension mirrors) and 19 sub-agents. A separate optional Firecrawl
 extension is also installable (see "Optional Extensions" below).
 
@@ -47,6 +47,9 @@ extension is also installable (see "Optional Extensions" below).
 | `/seo programmatic [url\|plan]` | Programmatic SEO analysis and planning |
 | `/seo competitor-pages [url\|generate]` | Competitor comparison page generation |
 | `/seo local <url>` | Local SEO analysis (GBP, citations, reviews, map pack) |
+| `/seo playbook [run\|next\|recheck] <url> "<keyword>" "<city>"` | Run The Local SEO Playbook (free, Stolos Digital): checklist, 12-week plan, coach mode |
+| `/seo keywords <business> "<city>"` | Local-first keyword research: main keyword (playbook 3.1), variations, page map |
+| `/seo citations <url> "<keyword>" "<city>"` | Citation and local link plan (playbook Stage 6) |
 | `/seo maps [command] [args]` | Maps intelligence (geo-grid, GBP audit, reviews, competitors) |
 | `/seo hreflang [url]` | Hreflang/i18n SEO audit and generation |
 | `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
@@ -134,7 +137,7 @@ Each emitted recommendation should carry:
 
 Detect business type from homepage signals:
 - **SaaS**: pricing page, /features, /integrations, /docs, "free trial", "sign up"
-- **Local Service**: phone number, address, service area, "serving [city]", Google Maps embed --> auto-suggest `/seo local` for deeper analysis
+- **Local Service**: phone number, address, service area, "serving [city]", Google Maps embed --> auto-suggest `/seo local` for deeper analysis and `/seo playbook` for the step-by-step 12-week plan
 - **E-commerce**: /products, /collections, /cart, "add to cart", product schema
 - **Publisher**: /blog, /articles, /topics, article schema, author pages, publication dates
 - **Agency**: /case-studies, /portfolio, /industries, "our work", client logos
@@ -233,8 +236,8 @@ Weighted aggregate of all categories:
 
 ## Sub-Skills
 
-This skill orchestrates 25 sub-skills (22 core + 1 framework integration + 2 extension
-mirrors). The orchestrator itself (`seo`) is the 26th in `skills/`, but does not
+This skill orchestrates 28 sub-skills (25 core + 1 framework integration + 2 extension
+mirrors). The orchestrator itself (`seo`) is the 29th in `skills/`, but does not
 orchestrate itself, so it is not enumerated below.
 
 1. **seo-audit** -- Full website audit with parallel delegation
@@ -262,6 +265,9 @@ orchestrate itself, so it is not enumerated below.
 23. **seo-image-gen** -- AI image generation for SEO assets via Gemini (extension mirror)
 24. **seo-flow** -- FLOW framework integration (Find -> Leverage -> Optimize -> Win, 41 AI prompts, CC BY 4.0)
 25. **seo-agentic** -- Agent readiness: Lighthouse Agentic Browsing, accessibility tree for agents, AI agent access policy, llms.txt, Markdown, ai-catalog.json, WebMCP
+26. **seo-playbook** -- The Local SEO Playbook (Stolos Digital, free) run by agents: 9 stages, filled checklist, dated 12-week plan, coach mode (`/seo playbook run|next|recheck`)
+27. **seo-keywords** -- Local-first keyword research: main "category + city" keyword (playbook 3.1), variations, page mapping
+28. **seo-citations** -- Citation and local link plan (playbook Stage 6): core listings, ranking directories, competitor gap
 
 ### Optional Extensions
 

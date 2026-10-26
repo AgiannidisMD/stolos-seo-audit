@@ -357,6 +357,39 @@ Local SEO analysis covering Google Business Profile, citations, reviews, and the
 
 ---
 
+### `/seo playbook [run|next|recheck] <url> "<keyword>" "<city>"`
+
+Runs The Local SEO Playbook (Stolos Digital's free 9-stage guide) for one local business. Same stages, step numbers and 12-week order as the PDF.
+
+**Example:**
+```
+/seo playbook run https://example.com "plumber" "Springfield"
+/seo playbook next
+```
+
+**What it produces:**
+- `PLAYBOOK-RUN.md`: the playbook checklist ticked from real checks, with step numbers and evidence
+- `BENCHMARK.md`: top-10 sheet and heatmap (DataForSEO) or the free Maps method
+- `WEEK-PLAN.md` and `SELF-CHECK.md`: dated 12-week plan, self-checks in weeks 4, 8 and 12
+- `PROMPTS.md`: the playbook prompts with the business facts filled in
+- Site checks by `playbook_check.py`: title, H1/H2, NAP + footer, map embed, LocalBusiness schema, sitemap page count, areas page
+
+`next` is coach mode: it reads the run folder and gives the next 3 steps for this week.
+
+---
+
+### `/seo keywords <business type> "<city>"`
+
+Local-first keyword research (playbook step 3.1): one main "category + city" keyword, then service, area, modifier and question variations mapped to pages. Volumes only from DataForSEO or Keyword Planner, otherwise `unknown`.
+
+---
+
+### `/seo citations <url> "<keyword>" "<city>"`
+
+Citation and local link plan (playbook Stage 6): core listings, directories that rank for the keyword, competitor gap list and local link prospects, each with how to get listed.
+
+---
+
 ### `/seo maps [command] [args]`
 
 Maps intelligence: geo-grid rank tracking, GBP profile audits, review intelligence, cross-platform NAP verification, competitor radius mapping.
@@ -770,6 +803,9 @@ Multi-page Lighthouse audit via Unlighthouse (extension, MIT, no API quota). **P
 | `/seo geo <url>` | AI search optimization (GEO) |
 | `/seo agentic <url>` | Agent readiness (Lighthouse Agentic Browsing, AI agent access, WebMCP) |
 | `/seo local <url>` | Local SEO (GBP, citations, reviews) |
+| `/seo playbook run <url> "<kw>" "<city>"` | The Local SEO Playbook: checklist, 12-week plan, coach |
+| `/seo keywords <business> "<city>"` | Local keyword research (playbook 3.1) |
+| `/seo citations <url> "<kw>" "<city>"` | Citation and local link plan (playbook Stage 6) |
 | `/seo maps [command]` | Maps intelligence (geo-grid, GBP audit, competitors) |
 | `/seo backlinks <url>` | Backlink profile analysis |
 | `/seo cluster <seed>` | SERP-based semantic clustering |

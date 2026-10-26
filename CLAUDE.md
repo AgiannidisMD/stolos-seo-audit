@@ -4,7 +4,7 @@
 
 This repository contains **Claude SEO**, a Tier 4 Claude Code skill for comprehensive
 SEO analysis across all industries. It follows the Agent Skills open standard and the
-3-layer architecture (directive, orchestration, execution). 26 sub-skills (22 core +
+3-layer architecture (directive, orchestration, execution). 29 sub-skills (25 core +
 1 orchestrator + 1 framework integration + 2 extension mirrors), 19 sub-agents (16 core +
 1 framework integration + 2 extension mirrors), and an extensible reference
 system cover technical SEO, content quality,
@@ -22,9 +22,9 @@ claude-seo/
   CONTRIBUTORS.md                    # Community credits (Pro Hub Challenge)
   AGENTS.md                          # Multi-platform agent instructions (Cursor, Antigravity)
   .claude-plugin/
-    plugin.json                    # Plugin manifest (v2.4.3)
+    plugin.json                    # Plugin manifest (v2.4.4)
     marketplace.json               # Marketplace catalog for distribution
-  skills/                            # 26 sub-skills (auto-discovered)
+  skills/                            # 29 sub-skills (auto-discovered)
     seo/                           # Main orchestrator skill
       SKILL.md                     # Entry point, routing table, core rules
       references/                  # On-demand knowledge files (13 files)
@@ -90,7 +90,7 @@ claude-seo/
     seo-flow.md                  # FLOW framework integration
   hooks/                           # Quality gate hooks
     hooks.json                   # PostToolUse schema validation
-  scripts/                         # 60 Python execution scripts
+  scripts/                         # 61 Python execution scripts
     google_auth.py               # Credential management (OAuth, SA, API key, 4-tier detection)
     backlinks_auth.py            # Backlink API credential management (Moz, Bing)
     moz_api.py                   # Moz Link Explorer API (DA/PA, spam, domains, anchors)
@@ -138,6 +138,7 @@ claude-seo/
     schema_ecommerce_validate.py # Product schema validator (merchant-listing requirements)
     iptc_ai_label.py             # IPTC DigitalSourceType audit/injection for AI imagery
     parasite_risk.py             # Parasite-SEO risk scanner
+    playbook_check.py            # Local SEO Playbook site checks (Stages 2, 4, 5)
     gbp_deprecation_lint.py      # GBP feature-deprecation linter
     domain_history.py            # Expired-domain heritage check
     seo_updates.py               # Primary-source Google updates query tool

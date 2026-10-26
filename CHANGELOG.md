@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.4] - 2026-10-26 (Stolos edition)
+
+### Added
+
+- `/seo playbook` (`skills/seo-playbook`): runs The Local SEO Playbook, Stolos
+  Digital's free 9-stage guide, with the same stages, step numbers, Basic run /
+  Advanced split and 12-week order. `run` writes `PLAYBOOK-RUN.md`,
+  `BENCHMARK.md`, `WEEK-PLAN.md`, `SELF-CHECK.md` and `PROMPTS.md`; `next` is a
+  coach mode that gives this week's next three steps; `recheck` fills the
+  week 4 / 8 / 12 self-check.
+- `scripts/playbook_check.py`: website checks for playbook steps 2.2, 2.4, 4.1,
+  4.2, 4.3, 5.1 and 5.4 (title formula and length, one H1 with category + city,
+  NAP in the footer, Google map embed, LocalBusiness JSON-LD with a matching
+  phone, sitemap page count via robots.txt, "areas we serve" link). Accent-
+  insensitive for Greek and other languages. A blocked page (HTTP 403 etc.)
+  returns an error instead of false failures.
+- `/seo keywords` (`skills/seo-keywords`): local-first keyword research built
+  on playbook step 3.1; volumes only from DataForSEO or Keyword Planner.
+- `/seo citations` (`skills/seo-citations`): citation and local link plan built
+  on playbook Stage 6.
+
 ## [2.4.3] - 2026-10-17 (Stolos edition)
 
 Stolos SEO Audit, the Stolos Digital edition of claude-seo by AgriciDaniel (MIT).

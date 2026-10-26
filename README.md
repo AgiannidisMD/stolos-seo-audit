@@ -3,7 +3,7 @@
 A free SEO and AI-search audit for your website. It runs inside Claude Code on your own computer: you type one
 command with your website address, and a team of AI agents checks your technical setup, content, structured data,
 local SEO and how ready your site is for AI answers (Google AI Overviews, ChatGPT, Perplexity). You get a full report
-and a prioritised action plan. Under the hood: 26 sub-skills and 19 sub-agents.
+and a prioritised action plan. Under the hood: 29 sub-skills and 19 sub-agents.
 
 Made available free by [Stolos Digital](https://stolosdigital.com). Based on
 [claude-seo](https://github.com/AgriciDaniel/claude-seo) by AgriciDaniel (MIT). See [NOTICE.md](NOTICE.md).
@@ -45,8 +45,33 @@ The audit takes a few minutes and creates a folder `yourwebsite.com-audit/` with
 - `ACTION-PLAN.md`: what to fix first, from critical to low
 - an optional PDF report
 
-Other useful commands: `/seo page <url>` for one page, `/seo local <url>` for local businesses, `/seo geo <url>` for
+Other useful commands: `/seo page <url>` for one page, `/seo local <url>` for a local SEO score, `/seo geo <url>` for
 AI-search readiness. The full list is in [docs/UPSTREAM-README.md](docs/UPSTREAM-README.md).
+
+## Local business? Run the playbook
+
+The audit tells you what is wrong. **The Local SEO Playbook** (our free 9-stage guide, the PDF you can get at
+[stolosdigital.com](https://stolosdigital.com)) tells you what to do, week by week. This plugin runs it for you:
+
+```
+/seo playbook run yourwebsite.com "plumber" "Your City"
+```
+
+You get a folder `yourwebsite.com-playbook/` with the playbook checklist ticked from real checks of your site (title,
+H1, NAP in the footer, map embed, LocalBusiness schema, page count, areas page), your top-10 benchmark, a dated
+12-week plan, the monthly self-check table and the playbook prompts filled in with your details. Every line carries
+the playbook's step number, so you can open the PDF at that page.
+
+Then, each week:
+
+```
+/seo playbook next
+```
+
+tells you which week you are in and the next three steps. Two helpers follow the same playbook stages:
+`/seo keywords` (pick your main keyword, step 3.1) and `/seo citations` (where to get listed, Stage 6).
+
+The playbook is a method, not a promise: nobody can guarantee rankings.
 
 ## Good to know
 
