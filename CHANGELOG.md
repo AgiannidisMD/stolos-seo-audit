@@ -30,8 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Pin `pillow>=13.0.0` (transitive via matplotlib and weasyprint) for the
-  October 2026 Pillow advisories flagged by pip-audit.
+- Pin `pillow>=13.0.0` on Python 3.11+ (transitive via matplotlib and
+  weasyprint) for the October 2026 Pillow advisories. Pillow 13 dropped
+  Python 3.10, so 3.10 installs keep Pillow 12.x: use Python 3.11+ to get
+  the fix. The dependency audit now runs on Python 3.11.
 
 ## [2.4.3] - 2026-10-17 (Stolos edition)
 
