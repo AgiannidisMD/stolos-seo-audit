@@ -8,10 +8,22 @@ and a prioritised action plan. Under the hood: 29 sub-skills and 19 sub-agents.
 Made available free by [Stolos Digital](https://stolosdigital.com). Based on
 [claude-seo](https://github.com/AgriciDaniel/claude-seo) by AgriciDaniel (MIT). See [NOTICE.md](NOTICE.md).
 
+## Quick start
+
+In Claude Code, type these three lines (use your own website, service and city):
+
+```
+/plugin marketplace add AgiannidisMD/stolos-seo-audit
+/plugin install claude-seo@stolosdigital
+/seo playbook run yourwebsite.com "plumber" "Your City"
+```
+
+The last line runs the free Local SEO Playbook on your site. For a full audit instead, type `/seo audit yourwebsite.com`.
+
 ## What you need
 
 - [Claude Code](https://claude.com/claude-code) (version 1.0.33 or newer) with a Claude account
-- Python 3.10 or newer and Git (most Macs already have both)
+- Python 3.10 or newer and Git (most Macs already have both). Python 3.11+ is recommended for the latest security fixes
 - About 10 minutes for the first run
 
 No API keys are required. Google Search Console, PageSpeed and GA4 connections are optional.
